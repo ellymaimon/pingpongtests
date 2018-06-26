@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using PingPongGame;
 
 namespace PingPongGame.Tests
@@ -7,10 +8,10 @@ namespace PingPongGame.Tests
     public class PingPongTests
     {
         [TestMethod]
-        public void IsNotInteger_InputIsNotInteger_False()
+        public void IsInteger_InputIsNotInteger_False()
         {
             PingPong testPingPong = new PingPong();
-            Assert.AreEqual(false, testPingPong.IsNotInteger("hello"));
+            Assert.AreEqual(false, testPingPong.IsInteger("hello"));
         }
 
         [TestMethod]
@@ -42,17 +43,35 @@ namespace PingPongGame.Tests
         }
 
         [TestMethod]
-        public void LengthListTest_ListLengthEqualsInput_True()
+        public void PopulateRangeList_IsListPopulated_ListContent()
         {
             PingPong testPingPong = new PingPong();
-            Assert.AreEqual(true, testPingPong.LengthListTest(5));
+            CollectionAssert.AreEqual(new List<int>(){1,2,3}, testPingPong.PopulateRangeList("3"));
         }
 
         [TestMethod]
-        public void FirstLastElement_IsListIncreasingByOne_True()
+        public void PopulateResultsList_CreatesFinishedList_ListContents()
         {
             PingPong testPingPong = new PingPong();
-            Assert.AreEqual(true, testPingPong.FirstLastElement(5));
+            List<string> list = new List<string>();
+            list.Add("1");
+            list.Add("2");
+            list.Add("ping");
+            list.Add("4");
+            list.Add("pong");
+            list.Add("ping");
+            list.Add("7");
+            list.Add("8");
+            list.Add("ping");
+            list.Add("pong");
+            list.Add("11");
+            list.Add("ping");
+            list.Add("13");
+            list.Add("14");
+            list.Add("ping-pong");
+
+
+            CollectionAssert.AreEqual(list, testPingPong.PopulateResultsList("15"));
         }
     }
 }
